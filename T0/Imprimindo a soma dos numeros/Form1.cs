@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace WindowsFormsApp1
+namespace Imprimindo_a_soma_dos_numeros
 {
     public partial class Form1 : Form
     {
@@ -17,9 +17,14 @@ namespace WindowsFormsApp1
             InitializeComponent();
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Olá Mundo");
+            int SomaNumeros = 0;
+            for (int i = 1; i <= 1000; i += 1)
+            {
+                SomaNumeros += 1;
+            }
+            MessageBox.Show("O Valor da soma é: " + SomaNumeros);
         }
     }
 }
