@@ -12,30 +12,25 @@ namespace ContaBanco
 {
     public partial class Form1 : Form
     {
-        Conta[] contas;
-        private Conta Conta;
+        private Conta[] contas;
+        private int numeroDeContas;
+
         public Form1()
         {
             InitializeComponent();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            contas = new Conta[2];
-
-            contas[0] = new Conta();
-            contas[0].NumeroConta = 1;
-            contas[0].Cliente = new Cliente("Vanessa Silva");
-
-            contas[1] = new Conta();
-            contas[1].NumeroConta = 2;
-            contas[1].Cliente = new Cliente("Melci Victor");
-            
-            foreach (Conta conta in contas)
-            {
-                comboContas.Items.Add           (conta.Cliente.Nome);
-                destinoDaTransferencia.Items.Add(conta.Cliente.Nome);
-            }
         }
+
+        //  Aqui
+        public AdicionaConta(Conta conta)
+        {
+           this.contas[this.numeroDeContas] = conta;
+            this.numeroDeContas++;
+            comboContas.Items.Add(conta);
+        }
+
         private void btnDeposita_Click(object sender, EventArgs e)
         {
             string ValorDoDeposito = txtValor.Text;
@@ -61,7 +56,6 @@ namespace ContaBanco
             MostraConta();
             }
         }
-
         private void MostraConta()
         {
             Conta contaSelecionada = this.BuscaContaSelecionada();
@@ -101,7 +95,6 @@ namespace ContaBanco
                 MostraConta();
             }
         }
-       
         private Conta BuscaContaSelecionada() 
         {
             int indiceContas = comboContas.SelectedIndex;
@@ -111,7 +104,6 @@ namespace ContaBanco
         {
             MostraConta();
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             {
@@ -130,10 +122,10 @@ namespace ContaBanco
         {
 
         }
-
         private void btnTeste_Click(object sender, EventArgs e)
         {
-
+                FrmCadastroDeConta cadastro = new FrmCadastroDeConta(this);
+                cadastro.ShowDialog();
         }
     }
 }
