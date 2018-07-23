@@ -14,17 +14,18 @@ namespace ContaBanco
         public Cliente Cliente { get; set; }
         public virtual void Sacar(double ValorSaque)
         {
-            if (ValorSaque <= this.Saldo && ValorSaque > 0)
-            {
-                if (!this.Cliente.MaiorDeIdade())
+                if (ValorSaque <= 0.0)
+                {
+                    throw new ArgumentException();
+                }
+                if (ValorSaque > this.Saldo)
+                {
+                    throw new SaldoInsuficienteException();
+                }
+                else
                 {
                     this.Saldo -= ValorSaque;
                 }
-                else if (ValorSaque <= 200.0)
-                {
-                    this.Saldo -= ValorSaque;
-                }
-            }
         }
         public virtual void Depositar(double ValorDeposito)
         {

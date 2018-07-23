@@ -59,8 +59,20 @@ namespace ContaBanco
             string ValorDoSaque   = txtValor.Text;
             double valorSacado    = Convert.ToDouble(ValorDoSaque);
             Conta contaIndice = this.BuscaContaSelecionada();
-            contaIndice.Sacar(valorSacado);
 
+            try
+            {
+                contaIndice.Sacar(valorSacado);
+                MessageBox.Show("Saque Liberado");
+            }
+            catch (SaldoInsuficienteException)
+            {
+                MessageBox.Show("Saldo insuficiente");
+            }
+            catch (System.ArgumentException)
+            {
+                MessageBox.Show("Valor do saque inválido.");
+            }
             MostraConta();
         }
        
@@ -89,6 +101,11 @@ namespace ContaBanco
             }
         }
         private void destinoDaTransferencia_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnTeste_Click(object sender, EventArgs e)
         {
 
         }
