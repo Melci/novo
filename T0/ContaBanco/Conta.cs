@@ -29,7 +29,11 @@ namespace ContaBanco
         }
         public virtual void Depositar(double ValorDeposito)
         {
-        if (ValorDeposito > 0)
+            if (ValorDeposito <= 0 )
+            {
+                throw new ArgumentException();
+            }
+            else
             {
                 this.Saldo += ValorDeposito;
             }

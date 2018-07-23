@@ -32,48 +32,74 @@ namespace ContaBanco
             
             foreach (Conta conta in contas)
             {
-                comboContas.Items.Add(conta.Cliente.Nome);
+                comboContas.Items.Add           (conta.Cliente.Nome);
                 destinoDaTransferencia.Items.Add(conta.Cliente.Nome);
             }
         }
         private void btnDeposita_Click(object sender, EventArgs e)
         {
             string ValorDoDeposito = txtValor.Text;
+
+            if (String.IsNullOrEmpty(ValorDoDeposito))
+            {
+                MessageBox.Show("Informe um valor para deposito!");
+            }
+            else
+            { 
             double valorDeposito   = Convert.ToDouble(ValorDoDeposito);
-            Conta contaIndice = this.BuscaContaSelecionada();
-            contaIndice.Depositar(valorDeposito);
-            this.MostraConta();
+            Conta contaIndice      = this.BuscaContaSelecionada();
+
+            try
+            {
+                contaIndice.Depositar(valorDeposito);
+                MessageBox.Show("Deposito efetuado com sucesso");
+            }
+            catch (System.ArgumentException)
+            {
+                MessageBox.Show("Valor de deposito inválido!");
+            }
+            MostraConta();
+            }
         }
+
         private void MostraConta()
         {
             Conta contaSelecionada = this.BuscaContaSelecionada();
             
-            textoTitular.Text = contaSelecionada.Cliente.Nome;
-            textoSaldo.Text = Convert.ToString(contaSelecionada.Saldo);
-            textoNumeroConta.Text = Convert.ToString(contaSelecionada.NumeroConta);
+            textoTitular.Text      = contaSelecionada.Cliente.Nome;
+            textoSaldo.Text        = Convert.ToString(contaSelecionada.Saldo);
+            textoNumeroConta.Text  = Convert.ToString(contaSelecionada.NumeroConta);
             txtValor.Clear();
             txtValor.Select();
         }
         private void btnSacar_Click(object sender, EventArgs e)
         {
-            string ValorDoSaque   = txtValor.Text;
-            double valorSacado    = Convert.ToDouble(ValorDoSaque);
-            Conta contaIndice = this.BuscaContaSelecionada();
+            string ValorDoSaque = txtValor.Text;
 
-            try
+            if (String.IsNullOrEmpty(ValorDoSaque))
             {
-                contaIndice.Sacar(valorSacado);
-                MessageBox.Show("Saque Liberado");
+                MessageBox.Show("Informe um valor para Saque!");
             }
-            catch (SaldoInsuficienteException)
+            else
             {
-                MessageBox.Show("Saldo insuficiente");
+                double valorSacado = Convert.ToDouble(ValorDoSaque);
+                Conta contaIndice = this.BuscaContaSelecionada();
+
+                try
+                {
+                    contaIndice.Sacar(valorSacado);
+                    MessageBox.Show("Saque Liberado");
+                }
+                catch (SaldoInsuficienteException)
+                {
+                    MessageBox.Show("Saldo insuficiente");
+                }
+                catch (System.ArgumentException)
+                {
+                    MessageBox.Show("Valor do saque inválido.");
+                }
+                MostraConta();
             }
-            catch (System.ArgumentException)
-            {
-                MessageBox.Show("Valor do saque inválido.");
-            }
-            MostraConta();
         }
        
         private Conta BuscaContaSelecionada() 
@@ -89,10 +115,10 @@ namespace ContaBanco
         private void button1_Click(object sender, EventArgs e)
         {
             {
-                Conta contaSelecionada = this.BuscaContaSelecionada();
-                int indiceDaContaDestino = destinoDaTransferencia.SelectedIndex;
-                Conta contaDestino = this.contas[indiceDaContaDestino];
-                string textoValor = txtValor.Text;
+                Conta contaSelecionada    = this.BuscaContaSelecionada();
+                int indiceDaContaDestino  = destinoDaTransferencia.SelectedIndex;
+                Conta contaDestino        = this.contas[indiceDaContaDestino];
+                string textoValor         = txtValor.Text;
                 double valorTransferencia = Convert.ToDouble(textoValor);
 
                 contaSelecionada.Transfere(valorTransferencia, contaDestino);
