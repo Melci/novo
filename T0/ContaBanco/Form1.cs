@@ -61,7 +61,8 @@ namespace ContaBanco
         private void MostraConta()
         {
             Conta contaSelecionada = this.BuscaContaSelecionada();
-            
+
+            txtTipoDaConta.Text    = Convert.ToString(contaSelecionada);
             textoTitular.Text      = contaSelecionada.Cliente;
             textoSaldo.Text        = Convert.ToString(contaSelecionada.Saldo);
             textoNumeroConta.Text  = Convert.ToString(contaSelecionada.NumeroConta);
