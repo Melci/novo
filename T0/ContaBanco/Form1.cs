@@ -21,12 +21,21 @@ namespace ContaBanco
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.contas = new Conta[20];
+            this.contas = new Conta[1];
             this.contas[0] = new ContaCorrente();
         }
 
         public void AdicionaConta(Conta conta)
         {
+            if (this.numeroDeContas == this.contas.Length)
+            {
+                Conta[] novaConta = new Conta[this.contas.Length * 2];
+                for (int indice = 0; indice < this.numeroDeContas; indice++)
+                {
+                    novaConta[indice] = this.contas[indice];
+                }
+                this.contas = novaConta;
+            }
             contas[numeroDeContas] = conta;
             numeroDeContas++;
             comboContas.Items.Add(conta.Cliente);
@@ -42,30 +51,30 @@ namespace ContaBanco
                 MessageBox.Show("Informe um valor para deposito!");
             }
             else
-            { 
-            double valorDeposito   = Convert.ToDouble(ValorDoDeposito);
-            Conta contaIndice      = this.BuscaContaSelecionada();
+            {
+                double valorDeposito = Convert.ToDouble(ValorDoDeposito);
+                Conta contaIndice = this.BuscaContaSelecionada();
 
-            try
-            {
-                contaIndice.Depositar(valorDeposito);
-                MessageBox.Show("Deposito efetuado com sucesso");
-            }
-            catch (System.ArgumentException)
-            {
-                MessageBox.Show("Valor de deposito inválido!");
-            }
-            MostraConta();
+                try
+                {
+                    contaIndice.Depositar(valorDeposito);
+                    MessageBox.Show("Deposito efetuado com sucesso");
+                }
+                catch (System.ArgumentException)
+                {
+                    MessageBox.Show("Valor de deposito inválido!");
+                }
+                MostraConta();
             }
         }
         private void MostraConta()
         {
             Conta contaSelecionada = this.BuscaContaSelecionada();
 
-            txtTipoDaConta.Text    = Convert.ToString(contaSelecionada);
-            textoTitular.Text      = contaSelecionada.Cliente;
-            textoSaldo.Text        = Convert.ToString(contaSelecionada.Saldo);
-            textoNumeroConta.Text  = Convert.ToString(contaSelecionada.NumeroConta);
+            txtTipoDaConta.Text = Convert.ToString(contaSelecionada);
+            textoTitular.Text = contaSelecionada.Cliente;
+            textoSaldo.Text = Convert.ToString(contaSelecionada.Saldo);
+            textoNumeroConta.Text = Convert.ToString(contaSelecionada.NumeroConta);
             txtValor.Clear();
             txtValor.Select();
         }
@@ -98,7 +107,7 @@ namespace ContaBanco
                 MostraConta();
             }
         }
-        private Conta BuscaContaSelecionada() 
+        private Conta BuscaContaSelecionada()
         {
             int indiceContas = comboContas.SelectedIndex;
             return this.contas[indiceContas];
@@ -110,10 +119,10 @@ namespace ContaBanco
         private void button1_Click(object sender, EventArgs e)
         {
             {
-                Conta contaSelecionada    = this.BuscaContaSelecionada();
-                int indiceDaContaDestino  = destinoDaTransferencia.SelectedIndex;
-                Conta contaDestino        = this.contas[indiceDaContaDestino];
-                string textoValor         = txtValor.Text;
+                Conta contaSelecionada = this.BuscaContaSelecionada();
+                int indiceDaContaDestino = destinoDaTransferencia.SelectedIndex;
+                Conta contaDestino = this.contas[indiceDaContaDestino];
+                string textoValor = txtValor.Text;
                 double valorTransferencia = Convert.ToDouble(textoValor);
 
                 contaSelecionada.Transfere(valorTransferencia, contaDestino);
@@ -127,8 +136,20 @@ namespace ContaBanco
         }
         private void btnTeste_Click(object sender, EventArgs e)
         {
-                FrmCadastroDeConta cadastro = new FrmCadastroDeConta(this);
-                cadastro.ShowDialog();
+            FrmCadastroDeConta cadastro = new FrmCadastroDeConta(this);
+            cadastro.ShowDialog();
+        }
+
+        private void btnExcluiCliente_Click(object sender, EventArgs e)
+        {
+            Conta contaSelecionada = this.BuscaContaSelecionada();
+            comboContas.Items.Remove(contaSelecionada.Cliente);
+
+            comboContas.Select();
+            txtTipoDaConta.Clear();
+            textoTitular.Clear();
+            textoSaldo.Clear();
+            textoNumeroConta.Clear();
         }
     }
 }

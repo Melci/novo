@@ -44,6 +44,7 @@
             this.btnAdicionarCliente = new System.Windows.Forms.Button();
             this.txtTipoDaConta = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
+            this.btnExcluiCliente = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textoTitular
@@ -160,9 +161,9 @@
             // 
             // btnAdicionarCliente
             // 
-            this.btnAdicionarCliente.Location = new System.Drawing.Point(27, 333);
+            this.btnAdicionarCliente.Location = new System.Drawing.Point(227, 59);
             this.btnAdicionarCliente.Name = "btnAdicionarCliente";
-            this.btnAdicionarCliente.Size = new System.Drawing.Size(148, 20);
+            this.btnAdicionarCliente.Size = new System.Drawing.Size(75, 49);
             this.btnAdicionarCliente.TabIndex = 15;
             this.btnAdicionarCliente.Text = "Adicionar Cliente";
             this.btnAdicionarCliente.UseVisualStyleBackColor = true;
@@ -170,7 +171,7 @@
             // 
             // txtTipoDaConta
             // 
-            this.txtTipoDaConta.Location = new System.Drawing.Point(27, 278);
+            this.txtTipoDaConta.Location = new System.Drawing.Point(227, 21);
             this.txtTipoDaConta.Name = "txtTipoDaConta";
             this.txtTipoDaConta.Size = new System.Drawing.Size(148, 20);
             this.txtTipoDaConta.TabIndex = 16;
@@ -178,17 +179,28 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(29, 262);
+            this.label5.Location = new System.Drawing.Point(229, 5);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(73, 13);
             this.label5.TabIndex = 17;
             this.label5.Text = "Tipo da conta";
             // 
+            // btnExcluiCliente
+            // 
+            this.btnExcluiCliente.Location = new System.Drawing.Point(308, 59);
+            this.btnExcluiCliente.Name = "btnExcluiCliente";
+            this.btnExcluiCliente.Size = new System.Drawing.Size(67, 49);
+            this.btnExcluiCliente.TabIndex = 18;
+            this.btnExcluiCliente.Text = "Excluir Cliente";
+            this.btnExcluiCliente.UseVisualStyleBackColor = true;
+            this.btnExcluiCliente.Click += new System.EventHandler(this.btnExcluiCliente_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(283, 396);
+            this.ClientSize = new System.Drawing.Size(476, 430);
+            this.Controls.Add(this.btnExcluiCliente);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.txtTipoDaConta);
             this.Controls.Add(this.btnAdicionarCliente);
@@ -231,6 +243,7 @@
         private System.Windows.Forms.Button btnAdicionarCliente;
         private System.Windows.Forms.TextBox txtTipoDaConta;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnExcluiCliente;
     }
 }
 
