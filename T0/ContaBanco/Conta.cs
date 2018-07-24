@@ -6,27 +6,14 @@ using System.Threading.Tasks;
 
 namespace ContaBanco
 {
-    class Conta
+    public abstract class Conta
     {
         public int NumeroConta { get; set; }
         public int Agencia { get; set; }
         public double Saldo { get; protected set; }
-        public Cliente Cliente { get; set; }
-        public virtual void Sacar(double ValorSaque)
-        {
-                if (ValorSaque <= 0.0)
-                {
-                    throw new ArgumentException();
-                }
-                if (ValorSaque > this.Saldo)
-                {
-                    throw new SaldoInsuficienteException();
-                }
-                else
-                {
-                    this.Saldo -= ValorSaque;
-                }
-        }
+        public String Cliente;
+        public abstract void Sacar(double ValorSaque);
+       
         public virtual void Depositar(double ValorDeposito)
         {
             if (ValorDeposito <= 0 )

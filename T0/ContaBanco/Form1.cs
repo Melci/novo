@@ -13,7 +13,7 @@ namespace ContaBanco
     public partial class Form1 : Form
     {
         private Conta[] contas;
-        private int numeroDeContas;
+        public int numeroDeContas;
 
         public Form1()
         {
@@ -21,14 +21,16 @@ namespace ContaBanco
         }
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.contas = new Conta[20];
+            this.contas[0] = new ContaCorrente();
         }
 
-        //  Aqui
-        public AdicionaConta(Conta conta)
+        public void AdicionaConta(Conta conta)
         {
-           this.contas[this.numeroDeContas] = conta;
-            this.numeroDeContas++;
-            comboContas.Items.Add(conta);
+            contas[numeroDeContas] = conta;
+            numeroDeContas++;
+            comboContas.Items.Add(conta.Cliente);
+            destinoDaTransferencia.Items.Add(conta.Cliente);
         }
 
         private void btnDeposita_Click(object sender, EventArgs e)
@@ -60,7 +62,7 @@ namespace ContaBanco
         {
             Conta contaSelecionada = this.BuscaContaSelecionada();
             
-            textoTitular.Text      = contaSelecionada.Cliente.Nome;
+            textoTitular.Text      = contaSelecionada.Cliente;
             textoSaldo.Text        = Convert.ToString(contaSelecionada.Saldo);
             textoNumeroConta.Text  = Convert.ToString(contaSelecionada.NumeroConta);
             txtValor.Clear();

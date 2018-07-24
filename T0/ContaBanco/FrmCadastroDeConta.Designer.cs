@@ -34,18 +34,19 @@
             this.txtNumero = new System.Windows.Forms.TextBox();
             this.lbNumeroConta = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.EscolhaDeTipoDeConta = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
             // 
             // txttitularConta
             // 
-            this.txttitularConta.Location = new System.Drawing.Point(135, 55);
+            this.txttitularConta.Location = new System.Drawing.Point(122, 103);
             this.txttitularConta.Name = "txttitularConta";
             this.txttitularConta.Size = new System.Drawing.Size(155, 20);
             this.txttitularConta.TabIndex = 0;
             // 
             // btnCadastrar
             // 
-            this.btnCadastrar.Location = new System.Drawing.Point(296, 80);
+            this.btnCadastrar.Location = new System.Drawing.Point(283, 128);
             this.btnCadastrar.Name = "btnCadastrar";
             this.btnCadastrar.Size = new System.Drawing.Size(75, 20);
             this.btnCadastrar.TabIndex = 1;
@@ -57,7 +58,7 @@
             // 
             this.lbNome.AutoSize = true;
             this.lbNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbNome.Location = new System.Drawing.Point(73, 59);
+            this.lbNome.Location = new System.Drawing.Point(60, 107);
             this.lbNome.Name = "lbNome";
             this.lbNome.Size = new System.Drawing.Size(45, 16);
             this.lbNome.TabIndex = 2;
@@ -65,7 +66,7 @@
             // 
             // txtNumero
             // 
-            this.txtNumero.Location = new System.Drawing.Point(135, 81);
+            this.txtNumero.Location = new System.Drawing.Point(122, 129);
             this.txtNumero.Name = "txtNumero";
             this.txtNumero.Size = new System.Drawing.Size(155, 20);
             this.txtNumero.TabIndex = 3;
@@ -74,7 +75,7 @@
             // 
             this.lbNumeroConta.AutoSize = true;
             this.lbNumeroConta.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbNumeroConta.Location = new System.Drawing.Point(73, 85);
+            this.lbNumeroConta.Location = new System.Drawing.Point(60, 133);
             this.lbNumeroConta.Name = "lbNumeroConta";
             this.lbNumeroConta.Size = new System.Drawing.Size(56, 16);
             this.lbNumeroConta.TabIndex = 4;
@@ -90,12 +91,22 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Cadastrar Nova Conta Corrente";
             // 
+            // EscolhaDeTipoDeConta
+            // 
+            this.EscolhaDeTipoDeConta.FormattingEnabled = true;
+            this.EscolhaDeTipoDeConta.Location = new System.Drawing.Point(122, 76);
+            this.EscolhaDeTipoDeConta.Name = "EscolhaDeTipoDeConta";
+            this.EscolhaDeTipoDeConta.Size = new System.Drawing.Size(155, 21);
+            this.EscolhaDeTipoDeConta.TabIndex = 6;
+            this.EscolhaDeTipoDeConta.SelectedIndexChanged += new System.EventHandler(this.EscolhaDeTipoDeConta_SelectedIndexChanged);
+            // 
             // FrmCadastroDeConta
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(430, 337);
+            this.Controls.Add(this.EscolhaDeTipoDeConta);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.lbNumeroConta);
             this.Controls.Add(this.txtNumero);
@@ -104,6 +115,7 @@
             this.Controls.Add(this.txttitularConta);
             this.Name = "FrmCadastroDeConta";
             this.Text = "Cadastro De Conta";
+            this.Load += new System.EventHandler(this.FrmCadastroDeConta_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -117,5 +129,6 @@
         private System.Windows.Forms.TextBox txtNumero;
         private System.Windows.Forms.Label lbNumeroConta;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.ComboBox EscolhaDeTipoDeConta;
     }
 }

@@ -41,7 +41,7 @@
             this.comboContas = new System.Windows.Forms.ComboBox();
             this.destinoDaTransferencia = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.btnTeste = new System.Windows.Forms.Button();
+            this.btnAdicionarCliente = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // textoTitular
@@ -156,22 +156,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // btnTeste
+            // btnAdicionarCliente
             // 
-            this.btnTeste.Location = new System.Drawing.Point(83, 303);
-            this.btnTeste.Name = "btnTeste";
-            this.btnTeste.Size = new System.Drawing.Size(121, 62);
-            this.btnTeste.TabIndex = 15;
-            this.btnTeste.Text = "Teste";
-            this.btnTeste.UseVisualStyleBackColor = true;
-            this.btnTeste.Click += new System.EventHandler(this.btnTeste_Click);
+            this.btnAdicionarCliente.Location = new System.Drawing.Point(27, 254);
+            this.btnAdicionarCliente.Name = "btnAdicionarCliente";
+            this.btnAdicionarCliente.Size = new System.Drawing.Size(148, 20);
+            this.btnAdicionarCliente.TabIndex = 15;
+            this.btnAdicionarCliente.Text = "Adicionar Cliente";
+            this.btnAdicionarCliente.UseVisualStyleBackColor = true;
+            this.btnAdicionarCliente.Click += new System.EventHandler(this.btnTeste_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(283, 396);
-            this.Controls.Add(this.btnTeste);
+            this.Controls.Add(this.btnAdicionarCliente);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.destinoDaTransferencia);
             this.Controls.Add(this.comboContas);
@@ -208,7 +208,7 @@
         private System.Windows.Forms.ComboBox comboContas;
         private System.Windows.Forms.ComboBox destinoDaTransferencia;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button btnTeste;
+        private System.Windows.Forms.Button btnAdicionarCliente;
     }
 }
 

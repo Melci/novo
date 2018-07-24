@@ -10,7 +10,18 @@ namespace ContaBanco
     {
         public override void Sacar(double ValorSaque)
         {
-            this.Saldo -= ValorSaque - 0.1;
+            if (ValorSaque <= 0.0)
+            {
+                throw new ArgumentException();
+            }
+            if (ValorSaque > this.Saldo)
+            {
+                throw new SaldoInsuficienteException();
+            }
+            else
+            {
+                this.Saldo -= ValorSaque;
+            }
         }
     }
 }
