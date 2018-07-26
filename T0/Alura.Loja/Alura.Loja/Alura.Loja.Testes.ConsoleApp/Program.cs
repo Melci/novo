@@ -23,34 +23,32 @@ namespace Alura.Loja.Testes.ConsoleApp
             GravarUsandoEntity();
             RecuperaProduto();
 
-            using (var repo = new LojaContext())
+            using (var repo = new ProdutoDaoEntity())
             {
-                Produto primeiro = repo.Produtos.First();
+                Produto primeiro = repo.Produtos().First();
                 primeiro.Nome = "Harry Potter - Editado";
-                repo.Produtos.Update(primeiro);
-                repo.SaveChanges();
+                repo.Atualizar(primeiro);
             }
             RecuperaProduto();
         }
 
         private static void ExcluirProdutos()
         {
-            using (var repo = new LojaContext())
+            using (var repo = new ProdutoDaoEntity())
             {
-                IList<Produto> produtos = repo.Produtos.ToList();
+                IList<Produto> produtos = repo.Produtos();
                 foreach(var item in produtos)
                 {
-                    repo.Produtos.Remove(item);
+                    repo.Remover(item);
                 }
-                repo.SaveChanges();
             }
         }
 
         private static void RecuperaProduto()
         {
-            using (var repo = new LojaContext())
+            using (var repo = new ProdutoDaoEntity())
             {
-                IList<Produto> produtos = repo.Produtos.ToList();
+                IList<Produto> produtos = repo.Produtos();
                 Console.WriteLine("Foram Encontrados {0} produto(s).", produtos.Count);
                 foreach (var item in produtos)
                 {
@@ -66,15 +64,9 @@ namespace Alura.Loja.Testes.ConsoleApp
             p.Categoria = "Livros";
             p.Preco = 19.89;
 
-            Produto p2 = new Produto();
-            p2.Nome = "O Simbolo perdido";
-            p2.Categoria = "Livros";
-            p2.Preco = 10.00;
-
-            using (var Contexto = new LojaContext())
+            using (var Contexto = new ProdutoDaoEntity())
             {
-                Contexto.Produtos.AddRange(p, p2);
-                Contexto.SaveChanges();
+                Contexto.Adicionar(p);
             }
         }
 
