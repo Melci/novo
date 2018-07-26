@@ -10,77 +10,38 @@ namespace Alura.Loja.Testes.ConsoleApp
     {
         static void Main(string[] args)
         {
-            // GravarUsandoAdoNet();
-            //GravarUsandoEntity();
-            //RecuperaProduto();
-            //ExcluirProdutos();
-            //RecuperaProduto();
-            AtualizarProduto();
-        }
-
-        private static void AtualizarProduto()
-        {
-            GravarUsandoEntity();
-            RecuperaProduto();
-
-            using (var repo = new ProdutoDaoEntity())
+            using (var contexto = new LojaContext())
             {
-                Produto primeiro = repo.Produtos().First();
-                primeiro.Nome = "Harry Potter - Editado";
-                repo.Atualizar(primeiro);
-            }
-            RecuperaProduto();
-        }
-
-        private static void ExcluirProdutos()
-        {
-            using (var repo = new ProdutoDaoEntity())
-            {
-                IList<Produto> produtos = repo.Produtos();
-                foreach(var item in produtos)
+                var produtos = contexto.Produtos.ToList();
+                foreach (var p in produtos)
                 {
-                    repo.Remover(item);
+                    Console.WriteLine(p);
                 }
-            }
-        }
-
-        private static void RecuperaProduto()
-        {
-            using (var repo = new ProdutoDaoEntity())
-            {
-                IList<Produto> produtos = repo.Produtos();
-                Console.WriteLine("Foram Encontrados {0} produto(s).", produtos.Count);
-                foreach (var item in produtos)
+                Console.WriteLine("---------------");
+                foreach (var e in contexto.ChangeTracker.Entries())
                 {
-                    Console.WriteLine(item.Nome);
+                    Console.WriteLine(e.State);
                 }
+
+                var p1 = produtos.Last();
+                p1.Nome = "The Walking Dead";
+
+                Console.WriteLine("---------------");
+                foreach (var e in contexto.ChangeTracker.Entries())
+                {
+                    Console.WriteLine(e.State);
+                }
+
+                //contexto.SaveChanges();
+
+                //Console.WriteLine("---------------");
+                //produtos = contexto.Produtos.ToList();
+                //foreach (var p in produtos)
+                //{
+                // Console.WriteLine(p);
+                //}
             }
         }
 
-        private static void GravarUsandoEntity()
-        {
-            Produto p = new Produto();
-            p.Nome = "Harry Potter e a Ordem da Fênix";
-            p.Categoria = "Livros";
-            p.Preco = 19.89;
-
-            using (var Contexto = new ProdutoDaoEntity())
-            {
-                Contexto.Adicionar(p);
-            }
-        }
-
-        private static void GravarUsandoAdoNet()
-        {
-            Produto p = new Produto();
-            p.Nome = "Harry Potter e a Ordem da Fênix";
-            p.Categoria = "Livros";
-            p.Preco = 19.89;
-
-            using (var repo = new ProdutoDAO())
-            {
-                repo.Adicionar(p);
-            }
-        }
     }
 }
