@@ -11,44 +11,16 @@ namespace Alura.Loja.Testes.ConsoleApp
     {
         static void Main(string[] args)
         {
-            using (var contexto = new LojaContext())
-            {
-                var produtos = contexto.Produtos.ToList();
+            var paofrances = new Produto();
+            paofrances.Nome = "Pão Francês";
+            paofrances.PrecoUnitario = 0.40;
+            paofrances.Unidade = "Unidade";
+            paofrances.Categoria = "Padaria";
 
-                ExibeEntries(contexto.ChangeTracker.Entries());
-
-                /*var novoProduto = new Produto()
-                {
-                    Nome = "Desinfetante",
-                    Categoria = "limpeza",
-                    Preco = 2.99
-                };
-                contexto.Produtos.Add(novoProduto);*/
-
-                var p1 = produtos.First();
-                contexto.Produtos.Remove(p1);
-
-                ExibeEntries(contexto.ChangeTracker.Entries());
-
-                Console.WriteLine("---------------");
-                foreach (var e in contexto.ChangeTracker.Entries())
-                {
-                    Console.WriteLine(e.State);
-                }
-
-                contexto.SaveChanges();
-
-                ExibeEntries(contexto.ChangeTracker.Entries());
-            }
-        }
-
-        private static void ExibeEntries(IEnumerable<EntityEntry> entries)
-        {
-            Console.WriteLine("---------------");
-            foreach (var e in entries)
-            {
-                Console.WriteLine(e.Entity.ToString() + " - " + e.State);
-            }
+            var compra = new compra();
+            compra.Quantidade = 6;
+            compra.Produto = paofrances;
+            compra.Preco = paofrances.PrecoUnitario * compra.Quantidade;
         }
     }
 }
