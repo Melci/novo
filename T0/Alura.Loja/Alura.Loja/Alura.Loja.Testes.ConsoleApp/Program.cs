@@ -11,16 +11,28 @@ namespace Alura.Loja.Testes.ConsoleApp
     {
         static void Main(string[] args)
         {
-            var paofrances = new Produto();
-            paofrances.Nome = "Pão Francês";
-            paofrances.PrecoUnitario = 0.40;
-            paofrances.Unidade = "Unidade";
-            paofrances.Categoria = "Padaria";
+            var promocaoDePascoa = new Promocao();
+            promocaoDePascoa.Descricao = "Pascoa Feliz";
+            promocaoDePascoa.DataInicio = DateTime.Now;
+            promocaoDePascoa.DataTermino = DateTime.Now.AddMonths(3);
 
-            var compra = new compra();
-            compra.Quantidade = 6;
-            compra.Produto = paofrances;
-            compra.Preco = paofrances.PrecoUnitario * compra.Quantidade;
+            promocaoDePascoa.Produtos.Add(new Produto());
+            promocaoDePascoa.Produtos.Add(new Produto());
+            promocaoDePascoa.Produtos.Add(new Produto());
+
+
+            using (var contexto = new LojaContext())
+            {
+              
+            }
+
+        }
+        private static void ExibeEntries(IEnumerable<EntityEntry> entries)
+        {
+            foreach (var e in entries)
+            {
+                Console.WriteLine(e.Entity.ToString() + " - " + e.State);
+            }
         }
     }
 }
