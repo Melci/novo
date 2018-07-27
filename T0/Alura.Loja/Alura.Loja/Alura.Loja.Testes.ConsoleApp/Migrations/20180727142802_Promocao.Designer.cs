@@ -8,7 +8,7 @@ using Alura.Loja.Testes.ConsoleApp;
 namespace Alura.Loja.Testes.ConsoleApp.Migrations
 {
     [DbContext(typeof(LojaContext))]
-    [Migration("20180727133522_Promocao")]
+    [Migration("20180727142802_Promocao")]
     partial class Promocao
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -46,13 +46,9 @@ namespace Alura.Loja.Testes.ConsoleApp.Migrations
 
                     b.Property<double>("PrecoUnitario");
 
-                    b.Property<int?>("PromocaoId");
-
                     b.Property<string>("Unidade");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PromocaoId");
 
                     b.ToTable("Produtos");
                 });
@@ -73,6 +69,19 @@ namespace Alura.Loja.Testes.ConsoleApp.Migrations
                     b.ToTable("Promocoes");
                 });
 
+            modelBuilder.Entity("Alura.Loja.Testes.ConsoleApp.PromocaoProduto", b =>
+                {
+                    b.Property<int>("PromocaoId");
+
+                    b.Property<int>("ProdutoId");
+
+                    b.HasKey("PromocaoId", "ProdutoId");
+
+                    b.HasIndex("ProdutoId");
+
+                    b.ToTable("PromocaoProduto");
+                });
+
             modelBuilder.Entity("Alura.Loja.Testes.ConsoleApp.compra", b =>
                 {
                     b.HasOne("Alura.Loja.Testes.ConsoleApp.Produto", "Produto")
@@ -81,11 +90,17 @@ namespace Alura.Loja.Testes.ConsoleApp.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("Alura.Loja.Testes.ConsoleApp.Produto", b =>
+            modelBuilder.Entity("Alura.Loja.Testes.ConsoleApp.PromocaoProduto", b =>
                 {
-                    b.HasOne("Alura.Loja.Testes.ConsoleApp.Promocao")
+                    b.HasOne("Alura.Loja.Testes.ConsoleApp.Produto", "produto")
+                        .WithMany("Promocoes")
+                        .HasForeignKey("ProdutoId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("Alura.Loja.Testes.ConsoleApp.Promocao", "Promocao")
                         .WithMany("Produtos")
-                        .HasForeignKey("PromocaoId");
+                        .HasForeignKey("PromocaoId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
         }
     }
